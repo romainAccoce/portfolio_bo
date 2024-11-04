@@ -5,24 +5,24 @@ import Informations from "../pages/Informations";
 import Users from "../pages/Users";
 
 const routes: RouteObject[] = [
-    {
-        path: 'projects',
-        element: <Projects />
-    },
-    {
-        path: 'informations',
-        element: <Informations />
-    },    
-    {
-        path: 'users',
-        element: <Users />
-    },
-]
+  {
+    path: "projects",
+    element: <Projects />,
+  },
+  {
+    path: "informations",
+    element: <Informations />,
+  },
+  {
+    path: "users",
+    element: <Users />,
+  },
+];
 
 export const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <App />,
-      children: routes,
-    },
-  ])
+  {
+    path: "/",
+    element: <App />,
+    children: routes,
+  },
+]);
