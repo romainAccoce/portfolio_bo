@@ -5,9 +5,13 @@ import {
 } from "react-router-dom"
 import './index.css'
 import { router } from './router/routes'
+import { ThemeProvider } from '@mui/material'
+import { theme } from './config/theme'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </StrictMode>,
 )
