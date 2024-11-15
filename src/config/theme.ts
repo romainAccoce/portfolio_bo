@@ -22,12 +22,15 @@ export const theme = createTheme({
   components: {
     MuiTabs: {
       styleOverrides: {
+        root: {
+          width: "fit-content",
+        },
         indicator: {
           left: 0,
           width: ".5rem",
-          borderRadius: "0 .5rem .5rem 0"
+          borderRadius: "0 .5rem .5rem 0",
         },
-      }
+      },
     },
     MuiTab: {
       styleOverrides: {
@@ -36,8 +39,15 @@ export const theme = createTheme({
           gap: ".5rem",
           padding: "0rem 2rem 0rem 2rem",
           textTransform: "capitalize",
-        }
+        },
       },
     },
-  }
+    MuiAvatar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: colors.highlightBlue,
+        },
+      },
+    },
+  },
 });

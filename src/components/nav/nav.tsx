@@ -1,47 +1,72 @@
-import { Box, IconButton, Tab, Tabs } from "@mui/material";
-import React, {useState} from "react";
+import { Box, IconButton, Tab, Tabs, Typography } from "@mui/material";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../router/routes";
-import { ExpandButtonStyle, NavStyle } from "./nav.style";
-import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
+import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+import Rotation from "../animations/rotation";
+import { NavStyle, TopNavContainerStyle } from "./nav.style";
+import User from "../user/user";
+import Expansion from "../animations/Expansion";
+import useMeasure from "react-use-measure";
+import Slide from "../animations/Slide";
 
 function Nav() {
   const [value, setValue] = useState<string>("projects");
   const [expanded, setExpanded] = useState<boolean>(false);
   const navigate = useNavigate();
+  const [ref, { width }] = useMeasure();
 
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
-    navigate(`/${newValue}`)
+    navigate(`/${newValue}`);
   };
 
   function a11yProps(index: number) {
     return {
       id: `vertical-tab-${index}`,
-      'aria-controls': `vertical-tabpanel-${index}`,
+      "aria-controls": `vertical-tabpanel-${index}`,
     };
   }
+
   return (
     <Box sx={NavStyle}>
-      <IconButton
-        sx={ExpandButtonStyle}
-        color="inherit"
-        disableRipple
-        onClick={() => setExpanded(!expanded)}
-      >
-        <ChevronLeftRoundedIcon fontSize="large"/>
-      </IconButton>
-      <Tabs
-        orientation="vertical"
-        value={value}
-        onChange={handleChange}
-        aria-label="Navigation menu"
-        textColor="inherit"
-      >
-        {
-          routes.map((route, i )=> <Tab key={`${value}_${i}`} iconPosition="start" icon={route.icon} label={expanded ? route.path : " "} value={route.path} {...a11yProps(i)} />)
-        }
-      </Tabs>
+      <Expansion width={width}>
+        <Box sx={TopNavContainerStyle}>
+          <User expanded={expanded} />
+          <IconButton
+            color="inherit"
+            disableRipple
+            onClick={() => setExpanded(!expanded)}
+          >
+            <Rotation condition={expanded}>
+              <ChevronRightRoundedIcon fontSize="large" />
+            </Rotation>
+          </IconButton>
+        </Box>
+        <Tabs
+          orientation="vertical"
+          value={value}
+          onChange={handleChange}
+          aria-label="Navigation menu"
+          textColor="inherit"
+          ref={ref}
+        >
+          {routes.map((route, i) => (
+            <Tab
+              key={`${value}_${i}`}
+              iconPosition="start"
+              icon={route.icon}
+              label={
+                <Slide condition={expanded}>
+                  <Typography>{expanded ? route.path : ""}</Typography>
+                </Slide>
+              }
+              value={route.path}
+              {...a11yProps(i)}
+            />
+          ))}
+        </Tabs>
+      </Expansion>
     </Box>
   );
 }
