@@ -8,6 +8,7 @@ export const colors = {
   highlightBlue: "#379E8C",
   highlightYellow: "#C59C15",
   lightGrey: "#f4f3ef",
+  white: "#fff",
 };
 
 export const theme = createTheme({
@@ -45,7 +46,7 @@ export const theme = createTheme({
     MuiAvatar: {
       styleOverrides: {
         root: {
-          backgroundColor: colors.highlightBlue,
+          backgroundColor: colors.highlightYellow,
         },
       },
     },

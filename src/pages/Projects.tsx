@@ -1,17 +1,38 @@
-import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import Slide from "../components/animations/Slide";
+import { getProjects } from "../api/api";
+import { ProjectType } from "../types/projects";
+import List from "../components/list/List";
+import { Typography } from "@mui/material";
+import ListItem from "../components/list/ListItem";
 
 function Projects() {
-  const [condition, setCondition] = useState(false);
+  const [projects, setProjects] = useState<ProjectType[]>([]);
 
   useEffect(() => {
-    setTimeout(() => setCondition(true), 0.3);
+    const getData = async () => {
+      const response = await getProjects();
+      if (response && response.data) {
+        setProjects(response.data);
+      }
+    };
+    getData().catch(console.error);
   }, []);
 
+  const items = projects.map((project) => (
+    <ListItem
+      key={`project-${project.id}`}
+      content={[
+        <Typography key={`project-${project.id}-${project.attributes.name}`}>
+          {project.attributes.name}
+        </Typography>,
+      ]}
+    />
+  ));
+
   return (
-    <Slide condition={condition}>
-      <Typography>Projects</Typography>
+    <Slide condition={projects.length > 0}>
+      <List title="Projects" items={items} />
     </Slide>
   );
 }

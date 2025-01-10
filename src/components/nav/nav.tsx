@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../router/routes";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
-import Rotation from "../animations/rotation";
-import { NavStyle, TopNavContainerStyle } from "./nav.style";
-import User from "../user/user";
 import Expansion from "../animations/Expansion";
 import useMeasure from "react-use-measure";
 import Slide from "../animations/Slide";
+import User from "../user/User";
+import { NavStyle, TopNavContainerStyle } from "./Nav.style";
+import Rotation from "../animations/Rotation";
 
 function Nav() {
   const [value, setValue] = useState<string>("projects");

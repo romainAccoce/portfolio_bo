@@ -10,11 +10,9 @@ function User({ expanded }: Props) {
   return (
     <Box sx={UserContainer}>
       <Avatar>G</Avatar>
-      {expanded && (
-        <Slide condition={expanded}>
-          <Typography>Guest</Typography>
-        </Slide>
-      )}
+      <Slide condition={expanded}>
+        <Typography>{expanded ? "Guest" : ""}</Typography>
+      </Slide>
     </Box>
   );
 }

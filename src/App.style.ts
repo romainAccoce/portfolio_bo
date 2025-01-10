@@ -8,3 +8,8 @@ export const AppStyle: SxProps = {
   flexDirection: "row",
   backgroundColor: colors.lightGrey,
 };
+
+export const PageContentStyle: SxProps = {
+  padding: "2rem",
+  flex: 1,
+};
